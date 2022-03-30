@@ -2,12 +2,15 @@ package com.example.book_recommender.entity;
 
 import lombok.Data;
 import javax.persistence.*;
+
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.sql.Timestamp;
 import com.example.book_recommender.ViewModel.BookViewModel;
 @Data
 @Entity
+@NoArgsConstructor
 public class Book{
     
     @Id
@@ -16,6 +19,9 @@ public class Book{
 
     String name;
 
+    public Book(String name) {
+        this.name = name;
+    }
 
     @CreationTimestamp
     Timestamp createTime;

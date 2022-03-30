@@ -9,4 +9,5 @@ public interface BookRepository extends CrudRepository<Book,Long> {
 
     Book findBookByName(String name);
 
+    Boolean existsByName(String name);
 }

@@ -1,10 +1,16 @@
 package com.example.book_recommender.util;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class Core {
+    public static void main(String[] args) {
+        Map<String, Double> va = new HashMap<>(){{put("历史",1d);put("语文",1d);put("数学",1d);put("政治",1d);}};
+        Map<String, Double> vb = new HashMap<>(){{put("数学",1d);put("语文",1d);put("地理",1d);}};
+        System.out.println(computeSimilarity(va,vb));
+    }
     public static double computeSimilarity(Map<String, Double> va, Map<String, Double> vb) {
         Set<String> compared = new HashSet<>();
 

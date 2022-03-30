@@ -10,5 +10,6 @@ public interface InterestRepository extends CrudRepository<Interest,Long> {
     Interest findInterestByName(String name);
 
 
+    Boolean existsByName(String name);
 
 }

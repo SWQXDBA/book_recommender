@@ -10,10 +10,6 @@ spring:
     username: root
     password: q12345
   jackson:
-    #ÅäÖÃÊ±¼ä¸ñÊ½»¯ Ç°¶Ë´«¹ıÀ´µÄÊ±ºò¸ù¾İÕâ¸ö¸ñÊ½timestamp
+    #é…ç½®æ—¶é—´æ ¼å¼åŒ– å‰ç«¯ä¼ è¿‡æ¥çš„æ—¶å€™æ ¹æ®è¿™ä¸ªæ ¼å¼timestamp
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
-
-
-
-

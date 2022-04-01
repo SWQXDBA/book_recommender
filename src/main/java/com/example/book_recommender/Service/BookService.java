@@ -77,7 +77,8 @@ public class BookService {
         final List<BookViewModel> books = new ArrayList<>();
         //找出相似度最大的用户
         similarities.entrySet().stream().max((o1, o2) -> (int) ((o1.getValue() - o2.getValue()) * 10))
-                .ifPresent(entry -> books.addAll(entry.getKey().getInterestingBooks()
+                .ifPresent(entry ->
+                        books.addAll(entry.getKey().getInterestingBooks()
                         .stream().map(Book::getViewModel)
                         .collect(Collectors.toList())));
 

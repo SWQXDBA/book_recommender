@@ -2,6 +2,7 @@ package com.example.book_recommender.Service;
 
 import com.example.book_recommender.Repository.BookRepository;
 import com.example.book_recommender.Repository.UserRepository;
+import com.example.book_recommender.ViewModel.BookViewModel;
 import com.example.book_recommender.entity.Book;
 import com.example.book_recommender.entity.Interest;
 import com.example.book_recommender.entity.User;
@@ -44,7 +45,7 @@ public class BookService {
         return false;
     }
 
-    public List<Book> getRecommendBook(String username) {
+    public List<BookViewModel> getRecommendBook(String username) {
         final User user = userRepository.findUserByUsername(username);
         if (user == null) {
             return new ArrayList<>();
@@ -73,10 +74,13 @@ public class BookService {
             final double similarity = Core.computeSimilarity(userInterests, otherUserInterests);
             similarities.put(matchUser, similarity);
         }
-        final List<Book> books = new ArrayList<>();
+        final List<BookViewModel> books = new ArrayList<>();
         //找出相似度最大的用户
         similarities.entrySet().stream().max((o1, o2) -> (int) ((o1.getValue() - o2.getValue()) * 10))
-                .ifPresent(entry -> books.addAll(entry.getKey().getInterestingBooks()));
+                .ifPresent(entry -> books.addAll(entry.getKey().getInterestingBooks()
+                        .stream().map(Book::getViewModel)
+                        .collect(Collectors.toList())));
+
         return books;
 
 

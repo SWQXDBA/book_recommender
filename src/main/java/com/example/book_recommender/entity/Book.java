@@ -23,6 +23,13 @@ public class Book{
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
     @CreationTimestamp
     Timestamp createTime;
 

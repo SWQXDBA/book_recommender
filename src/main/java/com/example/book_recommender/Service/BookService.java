@@ -57,8 +57,10 @@ public class BookService {
         for (Interest interest : interests) {
             matchUsers.addAll(interest.getUsers());
         }
+
         //移除自己
         matchUsers.remove(user);
+
         //通过用户的兴趣标签构造入参
         Map<String, Double> userInterests = new HashMap<>();
         for (Interest interest : user.getInterests()) {
@@ -71,16 +73,26 @@ public class BookService {
             for (Interest interest : matchUser.getInterests()) {
                 otherUserInterests.put(interest.getName(), 1d);
             }
+
             final double similarity = Core.computeSimilarity(userInterests, otherUserInterests);
             similarities.put(matchUser, similarity);
         }
         final List<BookViewModel> books = new ArrayList<>();
+
         //找出相似度最大的用户
         similarities.entrySet().stream().max((o1, o2) -> (int) ((o1.getValue() - o2.getValue()) * 10))
-                .ifPresent(entry ->
-                        books.addAll(entry.getKey().getInterestingBooks()
-                        .stream().map(Book::getViewModel)
-                        .collect(Collectors.toList())));
+                .ifPresent(entry ->{
+                            System.out.println("最相似的用户是"+entry.getKey()+",相似度 "+entry.getValue());
+        /*                    for (Interest interest : entry.getKey().getInterests()) {
+                                System.out.println(interest.getName());
+                            }*/
+                            books.addAll(
+                                    entry.getKey()
+                                            .getInterestingBooks()
+                                            .stream().map(Book::getViewModel)
+                                            .collect(Collectors.toList()));
+                        }
+                        );
 
         return books;
 

@@ -1,12 +1,13 @@
 package com.example.book_recommender.entity;
 
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.*;
 
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.example.book_recommender.ViewModel.UserViewModel;
@@ -23,15 +24,24 @@ public class User{
 
     String password;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                '}';
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
     @ManyToMany
-    Set<Interest> interests;
+    @EqualsAndHashCode.Exclude
+    Set<Interest> interests = new HashSet<>();
     @ManyToMany
-    Set<Book> interestingBooks;
+    @EqualsAndHashCode.Exclude
+    Set<Book> interestingBooks = new HashSet<>();
 
 
     @CreationTimestamp

@@ -12,6 +12,7 @@ public interface UserRepository extends CrudRepository<User,Long> {
 
     Boolean existsByUsername(String username);
     User findUserByPassword(String password);
+    void deleteAllByUsernameLike(String like);
 
 
 

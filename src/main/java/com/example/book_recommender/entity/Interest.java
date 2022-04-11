@@ -1,17 +1,20 @@
 package com.example.book_recommender.entity;
 
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.*;
 
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import com.example.book_recommender.ViewModel.InterestViewModel;
-@Data
+
 @Entity
+@Data
 @NoArgsConstructor
 public class Interest{
     
@@ -21,8 +24,10 @@ public class Interest{
 
     String name;
 
-    @ManyToMany
-    Set<User> users;
+    @ManyToMany(mappedBy = "interests")
+    @EqualsAndHashCode.Exclude
+    Set<User> users = new HashSet<>();
+
 
 
     @CreationTimestamp
@@ -30,6 +35,13 @@ public class Interest{
 
     @UpdateTimestamp
     Timestamp updateTime;
+
+    @Override
+    public String toString() {
+        return "Interest{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 
     public Interest(String name) {
         this.name = name;

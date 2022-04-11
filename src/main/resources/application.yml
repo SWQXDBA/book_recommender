@@ -13,3 +13,4 @@ spring:
     #配置时间格式化 前端传过来的时候根据这个格式timestamp
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+debug: false
